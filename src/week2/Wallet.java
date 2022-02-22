@@ -31,6 +31,7 @@ public class Wallet {
         assert dollars >= 0;
         assert cents >= 0;
         assert cents <= 99;
+        assert this.canAfford(dollars, cents);
         int cost = dollars * 100 + cents;
         this.pennies -= cost;
     }
@@ -47,8 +48,21 @@ public class Wallet {
         assert cents >= 0;
         assert cents <= 99;
 
-        // TODO: implement this correctly:
-        return false;
+        int cost = dollars * 100 + cents;
+
+        // create a string that contains a true value if it is afforable, and false if
+        // it is not affordable.
+        String trueOrFalse = "false";
+
+        // alternative: return this.pennies >= cost;
+
+        if (this.pennies >= cost) {
+            trueOrFalse = "true";
+            return true;
+        } else {
+            trueOrFalse = "false";
+            return false;
+        }
     }
 
     public int getDollars() {
@@ -86,5 +100,10 @@ public class Wallet {
         assert rich.canAfford(1_000, 99);
         // Make sure we can't.
         assert !money.canAfford(1_000, 99);
+
+        Wallet howMuch = new Wallet(1_000_000);
+        howMuch.spend(100, 9);
+        howMuch.print();
+
     }
 }
