@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+// write mthod use constructor, use 2 <> + <>
+
 /**
  * Represent a standard playing card.
  */
@@ -13,15 +15,11 @@ public class PlayingCard {
     /**
      * All the possible families of playing cards; often called 'suits'.
      */
-    public static String[] SUITS = {
-            "HEARTS", "CLUBS", "DIAMONDS", "SPADES",
-    };
+    public static String[] SUITS = { "HEARTS", "CLUBS", "DIAMONDS", "SPADES", };
     /**
      * All the possible values of playing cards; sometimes called ranks.
      */
-    public static String[] VALUES = {
-            "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
-    };
+    public static String[] VALUES = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
     /**
      * An index into the {@link #SUITS} array.
      */
@@ -59,8 +57,15 @@ public class PlayingCard {
      * @return the list, in whatever order is most reasonable.
      */
     public static List<PlayingCard> makeDeck() {
-        // TODO: a deck has 52 playing cards, one of each SUIT and VALUE combination.
-        return List.of();
+        // A deck has 52 playing cards, one of each SUIT and VALUE combination.
+        List<PlayingCard> cards = new ArrayList<>();
+
+        for (int i = 0; i < SUITS.length; i++) {
+            for (int k = 0; k < VALUES.length; k++) {
+                cards.add(new PlayingCard(i, k));
+            }
+        }
+        return cards;
     }
 
     /**
@@ -71,13 +76,20 @@ public class PlayingCard {
      *         smaller.
      */
     public int compareValue(PlayingCard other) {
-        // TODO: actually do this comparison.
-        return -2;
+        // Actually do this comparison.
+
+        if (this.value > other.value) {
+            return +1;
+        } else if (this.value < other.value) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 
     /**
-     * Play a game of High/Low with playing cards.
-     * Warning: no error handling on inputs.
+     * Play a game of High/Low with playing cards. Warning: no error handling on
+     * inputs.
      * 
      * @param args - ignored.
      */
