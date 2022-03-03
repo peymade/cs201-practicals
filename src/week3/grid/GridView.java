@@ -17,7 +17,7 @@ public class GridView extends GFX {
     /**
      * How big should each grid cell be?
      */
-    public static int TILE_SIZE = 72;
+    public static int TILE_SIZE = 50;
     /**
      * How much vertical space should the header at the top reserve.
      */
@@ -160,8 +160,8 @@ public class GridView extends GFX {
     }
 
     /**
-     * This method is called whenever buttons are pressed.
-     * Override this method to have your simulation react to button presses.
+     * This method is called whenever buttons are pressed. Override this method to
+     * have your simulation react to button presses.
      * 
      * @param current - an object containing directional button information.
      */

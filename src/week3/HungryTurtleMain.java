@@ -39,22 +39,32 @@ public class HungryTurtleMain extends GridView {
      */
     public HungryTurtleMain() {
         super(new GridEnv(GRID_WIDTH, GRID_HEIGHT));
-        // Start the turtle anywhere:
-        this.turtle = this.grid.insertRandomly(new Turtle());
 
         // Create a line of rocks on the side.
-        // TODO: wall in the environment with Rocks.
+        // Wall in the environment with Rocks.
         for (int y = 0; y < GRID_HEIGHT; y++) {
             this.grid.insert(new Rock()).setPosition(0, y);
         }
+        for (int x = 0; x < GRID_HEIGHT; x++) {
+            this.grid.insert(new Rock()).setPosition(9, x);
+        }
+        for (int k = 0; k < GRID_WIDTH; k++) {
+            this.grid.insert(new Rock()).setPosition(k, 0);
+        }
+        for (int j = 0; j < GRID_WIDTH; j++) {
+            this.grid.insert(new Rock()).setPosition(j, 9);
+        }
+
+        // Start the turtle anywhere:
+        this.turtle = this.grid.insertRandomly(new Turtle());
 
         // Keep a list of fruit (it's OK for the turtle to step on them)
         this.fruit = new ArrayList<>();
 
-        // TODO: base this loop off of Fruit.EMOJI_NAMES array.
-        for (int i = 0; i < 5; i++) {
-            // TODO: vary the kind of fruit.
-            this.fruit.add(this.grid.insertRandomly(new Fruit()));
+        // Base this loop off of Fruit.EMOJI_NAMES array.
+        for (int i = 0; i < Fruit.EMOJI_NAMES.length; i++) {
+            // Vary the kind of fruit.
+            this.fruit.add(this.grid.insertRandomly(new Fruit(i)));
         }
     }
 
@@ -85,6 +95,13 @@ public class HungryTurtleMain extends GridView {
         return true;
     }
 
+    public void click(int x, int y) {
+        Fruit f = new Fruit(4);
+        f.setPosition(x, y);
+        this.grid.insert(f);
+        this.fruit.add(f);
+    }
+
     /**
      * Helper method to process any fruit the Turtle may be standing on top of.
      */
@@ -99,7 +116,8 @@ public class HungryTurtleMain extends GridView {
                 this.grid.remove(it);
                 // Award points:
                 this.fruitsEaten++;
-                // TODO: remove from this.fruits list.
+                // Remove from this.fruits list.
+                this.fruit.remove(it);
             }
         }
     }
@@ -123,9 +141,7 @@ public class HungryTurtleMain extends GridView {
     }
 
     /**
-     * Run the HungryTurtle game:
-     * 1. create an instance
-     * 2. call start
+     * Run the HungryTurtle game: 1. create an instance 2. call start
      * 
      * @param args - ignore args.
      */

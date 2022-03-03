@@ -12,7 +12,7 @@ import week3.grid.draw.CustomFish;
  */
 public class LostFish extends Actor {
     /**
-     * Is this fish currently missing? If so, it will wander.
+     * Is this fish currently missing? If so, it will wander. turn off at some point
      */
     public boolean isMissing = true;
 
@@ -39,10 +39,7 @@ public class LostFish extends Actor {
     /**
      * What colors are available for these LostFish?
      */
-    private static Color[] FISH_COLORS = {
-            Color.red,
-            Color.green,
-            Color.orange,
+    private static Color[] FISH_COLORS = { Color.red, Color.green, Color.orange,
             // TODO: add more fish colors (see what colors are available via autocomplete!)
     };
 

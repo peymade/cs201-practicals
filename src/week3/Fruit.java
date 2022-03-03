@@ -16,18 +16,25 @@ public class Fruit extends Actor {
     /**
      * Construct a new Fruit object.
      */
-    public Fruit() {
-        // TODO: take an int parameter to this constructor, and look up into the static
+    public Fruit(int callNum) {
+        // Take an int parameter to this constructor, and look up into the static
         // array for the setEmoji call.
-        this.setEmoji(EMOJI_NAMES[0]);
+
+        this.setEmoji(EMOJI_NAMES[callNum]);
         this.visual.setScale(0.8);
     }
 
     @Override
     public void act() {
-        // TODO Challenge: the amazing shrinking fruit.
+        // Challenge: the amazing shrinking fruit.
         // Use this.visual.getScale() and this.visual.setScale() to shrink this fruit
         // over time, and use this.remove() to remove it when it gets too small.
+        // this.takeRandomStep();
+        double size = this.visual.getScale();
+        this.visual.setScale(size - 0.02);
+        if (size < 0.05) {
+            this.remove();
+        }
     }
 
 }
