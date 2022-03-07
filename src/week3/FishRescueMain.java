@@ -20,6 +20,7 @@ public class FishRescueMain extends GridView {
      */
     private List<LostFish> missingFish;
     /**
+     * 
      * Once you bump into them, they decide to follow you around.
      */
     private List<LostFish> followFish;
@@ -32,7 +33,9 @@ public class FishRescueMain extends GridView {
      */
     private Decoration hero;
 
-    // TODO: track the number of fish saved.
+    // Track the number of fish saved.
+
+    private Integer FishCount;
 
     /**
      * Construct a new FishRescue simulation.
@@ -46,6 +49,7 @@ public class FishRescueMain extends GridView {
         }
         // the list of 'following' fish starts empty.
         this.followFish = new ArrayList<>();
+        this.FishCount = 0;
 
         // create a home for the fish:
         this.fishHome = new Decoration("houses"); // maybe "coral" is more thematic...
@@ -58,13 +62,24 @@ public class FishRescueMain extends GridView {
         this.grid.insert(hero);
     }
 
-    // TODO: override getHeaderText to express the number of fish saved.
+    // Override getHeaderText to express the number of fish saved.
+
+    @Override
+    public String getHeaderText() {
+        // This text shows up at the top of the window.
+        // You won't need to mess with this.
+        return "Fish Saved: " + FishCount;
+    }
 
     @Override
     public void buttons(Buttons pressed) {
         IntPoint maybeStep = pressed.nextPosition(this.hero.getPoint());
-        // TODO: don't let the hero go outside the grid. (cmp w/HungryTurtleMain)
-        this.hero.setPoint(maybeStep);
+        // Don't let the hero go outside the grid.
+
+        if (maybeStep.x > 9 || maybeStep.x < 0 || maybeStep.y > 9 || maybeStep.y < 0) {
+        } else {
+            this.hero.setPoint(maybeStep);
+        }
 
         // update fish locations based on hero movement:
         this.fishFollow();
@@ -75,26 +90,35 @@ public class FishRescueMain extends GridView {
     }
 
     /**
-     * For all the missing fish, if they're in the same spot as the hero:
-     * 1. move them from missingFish to followFish.
-     * 2. change their isMissing variable to false.
+     * For all the missing fish, if they're in the same spot as the hero: 1. move
+     * them from missingFish to followFish. 2. change their isMissing variable to
+     * false.
      */
+
     public void recruitFish() {
-        for (LostFish f : missingFish) {
+        for (LostFish f : new ArrayList<>(missingFish)) {
             if (f.getPoint().equals(this.hero.getPoint())) {
-                // TODO: recruit fish to follow you.
+                // Recruit fish to follow you.
+                f.isMissing = false;
+                missingFish.remove(f);
+                followFish.add(f);
             }
         }
     }
 
     public void rescueFish() {
-        // TODO: determine if hero & fishHome in same spot
-        // TODO: then: remove fish from game & follow list, award points.
+        if (this.fishHome.getPoint().equals(this.hero.getPoint())) {
+            for (LostFish f : new ArrayList<>(followFish)) {
+                // Remove if touching home
+                this.grid.remove(f);
+                followFish.remove(f);
+                this.FishCount += 1;
+            }
+        }
     }
 
     /**
-     * Keep track of the places we have been recently:
-     * Why a LinkedList... hmm?
+     * Keep track of the places we have been recently: Why a LinkedList... hmm?
      */
     private LinkedList<IntPoint> steps = new LinkedList<>();
 

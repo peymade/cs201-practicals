@@ -39,8 +39,9 @@ public class LostFish extends Actor {
     /**
      * What colors are available for these LostFish?
      */
-    private static Color[] FISH_COLORS = { Color.red, Color.green, Color.orange,
-            // TODO: add more fish colors (see what colors are available via autocomplete!)
+    private static Color[] FISH_COLORS = { Color.red, Color.green, Color.orange, Color.CYAN, Color.MAGENTA,
+            Color.ORANGE, Color.pink, Color.DARK_GRAY
+            // Added more fish colors (see what colors are available via autocomplete!)
     };
 
     /**
