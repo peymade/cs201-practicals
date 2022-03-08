@@ -12,8 +12,8 @@ public class MapProblems {
     /**
      * Given no input, return a list of roman numeral values for each letter.
      * 
-     * See the corresponding test case for answers:
-     * - {@link MapProblemsTest#testRomanValues}
+     * See the corresponding test case for answers: -
+     * {@link MapProblemsTest#testRomanValues}
      * 
      * @return capitalized letter keys, numeric values.
      */
@@ -23,7 +23,10 @@ public class MapProblems {
         values.put('D', 500);
         values.put('C', 100);
         values.put('L', 50);
-        // TODO: put X=10, V=5, I=1
+        values.put('X', 10);
+        values.put('V', 5);
+        values.put('I', 1);
+        // put X=10, V=5, I=1
         return values;
     }
 
@@ -37,9 +40,12 @@ public class MapProblems {
     public static Map<String, Integer> countWords(List<String> words) {
         Map<String, Integer> counts = new HashMap<>();
         for (String word : words) {
-            // TODO: every time you see a word, add it to 'counts' or increment its value.
+            int before = counts.getOrDefault(word, 0);
+            counts.put(word, before + 1);
+            // Every time you see a word, add it to 'counts' or increment its value.
             // HINT: use counts.getOrDefault(key, defaultValue)
-            counts.put(word, 1);
+            // Every word will be mapped to a list of positions you put it in
+            // counts.put(word, 1);
         }
         return counts;
     }
@@ -52,12 +58,26 @@ public class MapProblems {
      * @return - a map containing the indices that each unique word occurs.
      */
     public static Map<String, List<Integer>> indexWords(List<String> words) {
+
+        // Create a map called index that stores string and list of positions
         Map<String, List<Integer>> index = new HashMap<>();
+
+        // Loop through the words we get as input
         for (int i = 0; i < words.size(); i++) {
+
+            // Find what the current location of the word is
             String word = words.get(i);
+
+            // If we have already stored a value for this key, add the new value to the
+            // preexisting list
             if (index.containsKey(word)) {
-                // TODO: what if the word exists already?
-            } else {
+
+                index.get(word).add(i);
+
+            }
+            // If we have not seen this value, create a list called positions, add the
+            // value, and put it in the index map
+            else {
                 List<Integer> positions = new ArrayList<>();
                 positions.add(i);
                 index.put(word, positions);
@@ -78,8 +98,11 @@ public class MapProblems {
         Set<String> output = new HashSet<>();
 
         for (String word : counts.keySet()) {
-            // TODO: look up word in counts and see if it's large enough
-            // if so, add to output.
+            // Look up word in counts and see if it's large enough
+
+            if (counts.get(word) > n) {
+                output.add(word);
+            }
         }
 
         return output;
