@@ -66,7 +66,7 @@ public class ComplexityEx {
      */
     static void timeIsPrime() {
         // create random data:
-        List<Integer> data = makeRandomInts(1000, 0, 5000);
+        List<Integer> data = makeRandomInts(100_000, 0, 5000);
         // create answer set, so that work happens.
         Set<Integer> foundPrimes = new HashSet<>();
 
@@ -92,12 +92,23 @@ public class ComplexityEx {
      * Timing experiment for listSearch.
      */
     static void timeListSearch() {
-        // TODO: create a timing experiment for listSearch:
+        // Create a timing experiment for listSearch:
         List<Integer> dataToSearch = makeRandomInts(4000, -1000, 1000);
         List<Integer> queries = makeRandomInts(1000, -1000, 1000);
         Set<Integer> foundQueries = new HashSet<>();
 
-        System.err.println("TODO");
+        long startT = System.currentTimeMillis();
+        // do the experiment:
+        for (int x : queries) {
+            if (dataToSearch.contains(x)) {
+                foundQueries.add(x);
+            }
+        }
+
+        long endT = System.currentTimeMillis();
+        double timeDifference = (endT - startT) / 1e3;
+        System.out.println("Found " + foundQueries.size() + " matching numbers out of " + dataToSearch.size() + " in "
+                + timeDifference + " seconds. Speed = " + (dataToSearch.size() / timeDifference) + " Tests/Sec.");
     }
 
     public static void main(String[] args) {
