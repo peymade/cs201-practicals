@@ -3,7 +3,8 @@ package week6;
 import java.util.ArrayList;
 
 import adt.StackADT;
-import adt.errors.TODOErr;
+import adt.errors.EmptyListError;
+// import adt.errors.TODOErr;
 
 /**
  * This class represents a stack by adding/removing to the back of a Java list.
@@ -20,27 +21,37 @@ public class JavaStack<T> implements StackADT<T> {
 
     @Override
     public void push(T item) {
-        // TODO: add to the back of the list
-        throw new TODOErr();
+        // add to the back of the list
+        this.inner.add(item);
     }
 
     @Override
     public T pop() {
-        // TODO: remove from the back of the list
-        throw new TODOErr();
+        // remove from the back of the list
+        if (this.isEmpty()) {
+            throw new EmptyListError();
+        } else {
+            return this.inner.remove(inner.size() - 1);
+
+        }
     }
 
     @Override
     public T peek() {
-        // TODO: look at the most recently-pushed item
+        // look at the most recently-pushed item
         // ... should be null if no such item.
-        throw new TODOErr();
+
+        if (this.isEmpty()) {
+            return null;
+        } else {
+            return this.inner.get(inner.size() - 1);
+        }
     }
 
     @Override
     public boolean isEmpty() {
-        // TODO: return true if this stack is empty;
-        throw new TODOErr();
+        // return true if this stack is empty;
+        return this.inner.size() == 0;
     }
 
 }
