@@ -35,6 +35,8 @@ public class DoublyLinkedList<T> extends ListADT<T> {
         checkNotEmpty();
         T deleted = start.value;
         Node<T> next = start.after;
+        // if they are both null, only one thing in the list
+
         if (next == null) {
             end = start = null;
         } else {
@@ -46,7 +48,11 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 
     @Override
     public T removeBack() {
+
         throw new TODOErr("DLL.removeBack");
+        // go to the last element. b.before = end
+        // need to move end
+        // symmetric to remove front
     }
 
     @Override
@@ -86,6 +92,7 @@ public class DoublyLinkedList<T> extends ListADT<T> {
     @Override
     public void addBack(T item) {
         throw new TODOErr("DLL.addBack");
+        // symmetric to add front
     }
 
     @Override
@@ -102,7 +109,7 @@ public class DoublyLinkedList<T> extends ListADT<T> {
                     addBack(item);
                     return;
                 }
-
+                // case 3, update left and right nodes
                 throw new TODOErr("DLL.addIndex(loop-body)");
             }
         }

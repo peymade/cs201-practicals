@@ -45,6 +45,7 @@ public class SLLQ<T> implements QueueADT<T> {
         }
     }
 
+    // removing from the front
     @Override
     public T dequeue() {
         if (this.start == null) {

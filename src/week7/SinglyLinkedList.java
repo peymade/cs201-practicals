@@ -12,6 +12,10 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 
     @Override
     public T removeFront() {
+        for (start = this.start; start != null; start = start.next) {
+            // go to second
+            return;
+        }
         throw new TODOErr("SLL.removeFront");
     }
 
@@ -62,6 +66,14 @@ public class SinglyLinkedList<T> extends ListADT<T> {
             addFront(item);
             return;
         }
+
+        Node<T> last = null;
+        for (Node<T> current = this.start; current != null; current = current.next) {
+            last = current;
+        }
+
+        assert (last.next == null);
+        last.next = new Node<T>(item, null);
         throw new TODOErr("SLL.addBack");
     }
 
@@ -76,7 +88,9 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 
         while (before != null) {
             if (at == index - 1) {
+                // code should go in here
                 throw new TODOErr("SLL.addIndex(loop-body)");
+                // return;
             }
             before = before.next;
             at++;
@@ -92,6 +106,7 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 
     @Override
     public T getBack() {
+        // find second to last element
         checkNotEmpty();
         Node<T> last = null;
         for (Node<T> n = this.start; n != null; n = n.next) {
@@ -113,6 +128,8 @@ public class SinglyLinkedList<T> extends ListADT<T> {
         for (Node<T> n = this.start; n != null; n = n.next) {
             if (at++ == index) {
                 n.value = value;
+                // instead of changing value of node, simply return it. getindex will look
+                // similar
                 return;
             }
         }

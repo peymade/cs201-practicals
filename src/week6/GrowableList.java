@@ -16,7 +16,7 @@ import adt.errors.*;
  */
 public class GrowableList<T> extends ListADT<T> {
     /**
-     * How big should the initial list be? This is public for use in tests.
+     * How big should the initial list be? This is public for use tests.
      * 
      * Note that real implementations try to make this really small or zero, in case
      * the list is never used.
@@ -56,11 +56,16 @@ public class GrowableList<T> extends ListADT<T> {
         checkNotEmpty();
         checkExclusiveIndex(index);
         T removed = this.getIndex(index);
+
+        for (int i = index; i < fill; i++) {
+            this.array.setIndex(i, array.getIndex(i + 1));
+        }
         fill--;
 
-        throw new TODOErr();
-        // Slide all elements to the left.
-        // return removed element
+        this.array.setIndex(fill, null);
+
+        return removed;
+
     }
 
     @Override
@@ -81,24 +86,32 @@ public class GrowableList<T> extends ListADT<T> {
      */
     private void resizeArray() {
         ArrayWrapper<T> larger = new ArrayWrapper<>(this.fill * 2);
-        // copy to larger;
-        // hold onto it by replacing this.array
-        throw new TODOErr();
+        for (int i = 0; i < fill; i++) {
+            larger.setIndex(i, this.getIndex(i));
+        }
+
+        this.array = larger;
+
     }
 
     @Override
     public void addIndex(int index, T item) {
         // Add to a specific location is the only list method that accepts the size of
         // the list as a valid argument. Think about why.
+        // when we add to things we need to add to fill
         this.checkInclusiveIndex(index);
         // Make space if needed:
         if (fill >= array.length()) {
             this.resizeArray();
         }
 
-        throw new TODOErr();
-        // shifting items to the right. (HINT: loop backwards)
-        // put this item in the middle
+        for (int i = fill - 1; i >= index; i--) {
+            this.array.setIndex((i + 1), array.getIndex(i));
+        }
+        fill++;
+
+        this.setIndex(index, item);
+
     }
 
     @Override
