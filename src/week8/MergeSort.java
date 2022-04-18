@@ -27,10 +27,18 @@ public class MergeSort {
      * @return a new list containing the sorted output.
      */
     public static ListADT<Integer> doMergeSortRecursively(ListADT<Integer> input) {
+
+        // base case
         if (input.size() <= 1) {
             return input;
         }
+
+        // decide where the middle index is
         int mid = input.size() / 2;
+
+        // slice each list
+        // do merge sort recursively on each list
+        //
         throw new TODOErr("doMergeSortRecursively mid=" + mid);
     }
 
@@ -47,6 +55,11 @@ public class MergeSort {
      */
     public static ListADT<Integer> doMergeSortIteratively(ListADT<Integer> input) {
         // Create singleton lists as "work" queue.
+        // sslq of integer lists. delete from input one at a time, and add to the back
+        // of a temporary list
+        // while(work.size > 1)
+        // if using a list, don't call work.size many times
+        // if front and back are same, there must be only one thing in list
         SLLQ<ListADT<Integer>> work = new SLLQ<>();
         while (!input.isEmpty()) {
             ListADT<Integer> job = new JavaList<>();
@@ -54,6 +67,7 @@ public class MergeSort {
             work.enqueue(job);
         }
 
+        // grab the pieces and put them together
         throw new TODOErr("doMergeSortIteratively");
     }
 }

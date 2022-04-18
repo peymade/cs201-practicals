@@ -35,7 +35,6 @@ public class DoublyLinkedList<T> extends ListADT<T> {
         checkNotEmpty();
         T deleted = start.value;
         Node<T> next = start.after;
-        // if they are both null, only one thing in the list
 
         if (next == null) {
             end = start = null;
@@ -48,11 +47,21 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 
     @Override
     public T removeBack() {
+        checkNotEmpty();
 
-        throw new TODOErr("DLL.removeBack");
-        // go to the last element. b.before = end
-        // need to move end
-        // symmetric to remove front
+        T deleted = end.value;
+        Node<T> secondtoLast = end.before;
+
+        if (secondtoLast == null) {
+            end = start = null;
+        } else {
+            secondtoLast.after = null;
+        }
+        end = secondtoLast;
+
+        return deleted;
+
+        // throw new TODOErr("DLL.removeBack");
     }
 
     @Override
@@ -91,8 +100,15 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 
     @Override
     public void addBack(T item) {
-        throw new TODOErr("DLL.addBack");
-        // symmetric to add front
+        // throw new TODOErr("DLL.addBack");
+        if (start == null) {
+            start = end = new Node<T>(item);
+        } else {
+            Node<T> secondtolast = end;
+            end = new Node<T>(item);
+            secondtolast.after = end;
+            end.before = secondtolast;
+        }
     }
 
     @Override
@@ -109,8 +125,16 @@ public class DoublyLinkedList<T> extends ListADT<T> {
                     addBack(item);
                     return;
                 }
-                // case 3, update left and right nodes
-                throw new TODOErr("DLL.addIndex(loop-body)");
+
+                Node<T> infrontofNew = n;
+                Node<T> behindNew = n.after;
+                Node<T> newB = new Node<T>(item);
+                infrontofNew.after = newB;
+                newB.before = infrontofNew;
+                newB.after = behindNew;
+                behindNew.before = newB;
+                return;
+                // throw new TODOErr("DLL.addIndex(loop-body)");
             }
         }
         throw new BadIndexError(index);

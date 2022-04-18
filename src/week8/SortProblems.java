@@ -13,7 +13,16 @@ public class SortProblems {
      * @return true if they are sorted, false if not.
      */
     public static boolean isSorted(ListADT<Integer> data) {
-        throw new TODOErr("isSorted");
+
+        for (int i = 0; i < data.size() - 1; i++) {
+            if (data.getIndex(i) > data.getIndex(i + 1)) {
+                return false;
+            }
+        }
+
+        return true;
+
+        // throw new TODOErr("isSorted");
     }
 
     /**
