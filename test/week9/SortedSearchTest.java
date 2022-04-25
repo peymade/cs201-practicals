@@ -32,8 +32,7 @@ public class SortedSearchTest {
         }
 
         for (int i = 0; i < 100; i++) {
-            assertEquals("Item " + i + " should be at position " + i, i,
-                    binarySearchIterative(i, data));
+            assertEquals("Item " + i + " should be at position " + i, i, binarySearchIterative(i, data));
         }
 
         assertEquals(-1, binarySearchIterative(-100, data));
@@ -48,8 +47,7 @@ public class SortedSearchTest {
         }
 
         for (int i = 0; i < 100; i++) {
-            assertEquals("Item " + i + " should be at position " + i, i,
-                    binarySearchRecursive(i, data));
+            assertEquals("Item " + i + " should be at position " + i, i, binarySearchRecursive(i, data));
         }
 
         assertEquals(-1, binarySearchRecursive(-100, data));

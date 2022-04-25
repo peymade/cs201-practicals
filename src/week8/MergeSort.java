@@ -15,7 +15,44 @@ public class MergeSort {
      * @return a sorted list containing all of the items from lhs and rhs.
      */
     public static ListADT<Integer> combineTwoSortedLists(ListADT<Integer> lhs, ListADT<Integer> rhs) {
-        throw new TODOErr("combineTwoSortedLists");
+
+        ListADT<Integer> newSort = new JavaList<>();
+
+        // while they both still have things in them
+        while (lhs.size() > 0 && rhs.size() > 0) {
+
+            if (lhs.getFront() < rhs.getFront()) {
+                newSort.addBack(lhs.removeFront());
+            } else {
+                newSort.addBack(rhs.removeFront());
+            }
+
+        }
+        if (lhs.size() > 0) {
+
+            if (lhs.size() == 1) {
+                newSort.addBack(lhs.getFront());
+            } else {
+                for (int i = 0; i < lhs.size(); i++) {
+                    newSort.addBack(lhs.getIndex(i));
+                }
+            }
+
+        } else if (rhs.size() > 0) {
+
+            if (rhs.size() == 1) {
+                newSort.addBack(rhs.getFront());
+            } else {
+                for (int i = 0; i < rhs.size(); i++) {
+                    newSort.addBack(rhs.getIndex(i));
+                }
+            }
+
+        }
+
+        return newSort;
+
+        // throw new TODOErr("combineTwoSortedLists");
     }
 
     /**
@@ -28,18 +65,20 @@ public class MergeSort {
      */
     public static ListADT<Integer> doMergeSortRecursively(ListADT<Integer> input) {
 
-        // base case
+        int mid = input.size() / 2;
+        ListADT<Integer> left = input.slice(0, mid);
+        ListADT<Integer> right = input.slice(mid, input.size());
+
+        // base case. if input is smaller than or equal to one, return it
         if (input.size() <= 1) {
             return input;
+        } else {
+
+            return combineTwoSortedLists(doMergeSortRecursively(left), doMergeSortRecursively(right));
+
         }
 
-        // decide where the middle index is
-        int mid = input.size() / 2;
-
-        // slice each list
-        // do merge sort recursively on each list
-        //
-        throw new TODOErr("doMergeSortRecursively mid=" + mid);
+        // throw new TODOErr("doMergeSortRecursively mid=" + mid);
     }
 
     /**
@@ -54,20 +93,34 @@ public class MergeSort {
      * @return a new list containing the sorted output.
      */
     public static ListADT<Integer> doMergeSortIteratively(ListADT<Integer> input) {
-        // Create singleton lists as "work" queue.
-        // sslq of integer lists. delete from input one at a time, and add to the back
-        // of a temporary list
-        // while(work.size > 1)
-        // if using a list, don't call work.size many times
-        // if front and back are same, there must be only one thing in list
+
+        ListADT<Integer> newSort = new JavaList<>();
+        int i = 0;
+
         SLLQ<ListADT<Integer>> work = new SLLQ<>();
         while (!input.isEmpty()) {
             ListADT<Integer> job = new JavaList<>();
             job.addBack(input.removeFront());
             work.enqueue(job);
+            i++;
         }
 
         // grab the pieces and put them together
-        throw new TODOErr("doMergeSortIteratively");
+
+        while (!work.isEmpty() && i > 1) {
+
+            ListADT<Integer> piece1 = work.dequeue();
+            ListADT<Integer> piece2 = work.dequeue();
+
+            newSort = combineTwoSortedLists(piece1, piece2);
+
+            work.enqueue(newSort);
+
+            i--;
+        }
+
+        return newSort;
+
+        // throw new TODOErr("doMergeSortIteratively");
     }
 }

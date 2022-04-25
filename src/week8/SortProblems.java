@@ -33,8 +33,29 @@ public class SortProblems {
      * @param target - the sorted list to modify (might be empty!)
      */
     public static void insertSorted(int x, ListADT<Integer> target) {
-        throw new TODOErr("insertSorted");
+
+        // loop through until you find a number larger than it, the place it at that
+        // index -1
+
+        if (target.size() == 0) {
+            target.addFront(x);
+        } else if (target.getIndex(0) > x) {
+            target.addFront(x);
+        } else if (target.getIndex(target.size() - 1) < x) {
+            target.addBack(x);
+        } else {
+
+            int i = 0;
+            while (target.getIndex(i) < x) {
+                i++;
+            }
+
+            target.addIndex(i, x);
+
+        }
     }
+
+    // throw new TODOErr("insertSorted");
 
     /**
      * Find the position of the minimum element of list starting at start. Helper
@@ -46,7 +67,20 @@ public class SortProblems {
      */
     public static int findMinPosition(ListADT<Integer> list, int start) {
         assert (start < list.size()) : "There should be stuff in the list to the right of start!";
-        throw new TODOErr("findMinPosition");
+
+        int current = start;
+
+        // start is the index to start at
+
+        for (int i = start; i < list.size() - 1; i++) {
+            if (list.getIndex(i) < list.getIndex(current)) {
+                current = i;
+            }
+        }
+
+        return current;
+
+        // throw new TODOErr("findMinPosition");
     }
 
     /**
@@ -58,7 +92,13 @@ public class SortProblems {
      */
     public static ListADT<Integer> insertionSort(ListADT<Integer> input) {
         ListADT<Integer> output = new JavaList<>();
-        throw new TODOErr("insertionSort");
+
+        for (int i = 0; i < input.size(); i++) {
+            insertSorted(input.getIndex(i), output);
+        }
+
+        return output;
+        // throw new TODOErr("insertionSort");
     }
 
     /**
@@ -71,8 +111,22 @@ public class SortProblems {
      * @param fixMe - the input and output of this method -- it modifies a list
      *              in-place.
      */
+
     public static void selectionSort(ListADT<Integer> fixMe) {
-        throw new TODOErr("selectionSort");
+
+        // go through indexes one by one.
+        // at each index, find min position
+        // swap this minpos(cur) with i
+        for (int i = 0; i < fixMe.size() - 1; i++) {
+
+            System.out.println(fixMe.getIndex(i));
+
+            // set variable equal to the index of the new minimum
+            // int cur = findMinPosition(fixMe, i);
+            fixMe.swap(i, findMinPosition(fixMe, i));
+        }
+
+        // throw new TODOErr("selectionSort");
     }
 
 }
