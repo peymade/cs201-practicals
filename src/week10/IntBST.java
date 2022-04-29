@@ -89,6 +89,7 @@ public class IntBST {
      */
     public List<Integer> toSortedList() {
         ArrayList<Integer> output = new ArrayList<>();
+        // if root exists, call recursively
         if (this.root != null) {
             this.root.addToSortedList(output);
         }
@@ -125,9 +126,8 @@ public class IntBST {
     }
 
     /**
-     * Remove from this IntBST.
-     * This method uses the trick of temporarily generating a new root value, to be
-     * the 'parent' of the root.
+     * Remove from this IntBST. This method uses the trick of temporarily generating
+     * a new root value, to be the 'parent' of the root.
      * 
      * Most of the work done here: {@linkplain Node#remove(int, Node)}
      * 
@@ -220,7 +220,22 @@ public class IntBST {
         public int getHeight() {
             int leftHeight = 0;
             int rightHeight = 0;
-            throw new TODOErr("IntBST.Node.getHeight");
+
+            if (this.left != null) {
+                leftHeight = this.left.getHeight();
+            }
+
+            if (this.right != null) {
+                rightHeight = this.right.getHeight();
+            }
+
+            if (leftHeight > rightHeight) {
+                return leftHeight + 1;
+            } else {
+                return rightHeight + 1;
+            }
+
+            // throw new TODOErr("IntBST.Node.getHeight");
         }
 
         /**
@@ -274,7 +289,18 @@ public class IntBST {
          * @param output - a list.
          */
         public void addToSortedList(List<Integer> output) {
-            throw new TODOErr("IntBST.addToSortedList");
+
+            if (this.left != null) {
+                this.left.addToSortedList(output);
+
+            }
+
+            output.add(this.value);
+
+            if (this.right != null) {
+                this.right.addToSortedList(output);
+            }
+            // throw new TODOErr("IntBST.addToSortedList");
         }
 
         /**
@@ -296,7 +322,11 @@ public class IntBST {
          */
         public int getMaximum() {
             // Recurse to the bottom-right most element of the IntBST.
-            throw new TODOErr("IntBST.Node.getMaximum");
+            if (this.right != null) {
+                return this.right.getMaximum();
+            }
+            return this.value;
+            // throw new TODOErr("IntBST.Node.getMaximum");
         }
 
         /**
@@ -304,9 +334,9 @@ public class IntBST {
          * 
          * The algorithm depends on whether the node is in the middle or the bottom:
          * 
-         * 1. if there's no children, or only one, cutting it out is easy.
-         * 2. if there's two children, we actually need to find the minimum from there
-         * to swap upward...
+         * 1. if there's no children, or only one, cutting it out is easy. 2. if there's
+         * two children, we actually need to find the minimum from there to swap
+         * upward...
          * 
          * 
          * @param value  - the value to remove.
@@ -362,8 +392,18 @@ public class IntBST {
         public boolean contains(int value) {
             if (this.value == value) {
                 return true;
+            } else if (value < this.value) {
+                if (this.left != null) {
+                    return this.left.contains(value);
+                }
+            } else {
+                if (this.right != null) {
+                    return this.right.contains(value);
+                }
             }
-            throw new TODOErr("IntBST.Node.contains");
+
+            return false;
+            // throw new TODOErr("IntBST.Node.contains");
         }
 
     }
