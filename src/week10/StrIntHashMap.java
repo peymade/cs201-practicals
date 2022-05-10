@@ -126,7 +126,12 @@ public class StrIntHashMap extends MapADT<String, Integer> {
         // 3. Search the list for the pair we want:
         for (EntryNode current = start; current != null; current = current.next) {
             // 3.a. If found, update the node and leave this method early.
-            throw new TODOErr("StrIntHashMap.put");
+            if (current.matches(key)) {
+
+                current.value += 1;
+                return;
+            }
+            // throw new TODOErr("StrIntHashMap.put");
         }
         // 3.b. If not found, add our key, value to the front of this list! O(1).
         EntryNode addFront = new EntryNode(key, value, start);
@@ -141,9 +146,9 @@ public class StrIntHashMap extends MapADT<String, Integer> {
     }
 
     /**
-     * Return true if the key is present in this HashMap.
-     * We do not just call "this.get(key) != null" because we want to allow folks to
-     * store 'null' values in their HashMap if they want.
+     * Return true if the key is present in this HashMap. We do not just call
+     * "this.get(key) != null" because we want to allow folks to store 'null' values
+     * in their HashMap if they want.
      * 
      * @param key - the key to search for.
      * @return true if it was found, false if not.
@@ -170,11 +175,19 @@ public class StrIntHashMap extends MapADT<String, Integer> {
     @Override
     public Integer get(String key) {
         // 1. Calculate which bucket contains our key.
+        int bucket = whichBucket(key);
         // 2. Get the list of entries in that bucket:
+        EntryNode start = this.buckets.getIndex(bucket);
         // 3. Search the list for the pair we want:
+        for (EntryNode current = start; current != null; current = current.next) {
+            if (current.matches(key)) {
+                return current.value;
+            }
+        }
         // 3.a. If we find it, return the value being stored!
         // 3.b. If we don't find it, return null!
-        throw new TODOErr("StrIntHashMap.get");
+        return null;
+        // throw new TODOErr("StrIntHashMap.get");
     }
 
     @Override
@@ -198,7 +211,17 @@ public class StrIntHashMap extends MapADT<String, Integer> {
                 if (previous == null) {
                     // 3.a.1. it was the first node: (removeFront)
                     // HINT: you'll need buckets.setIndex
-                    throw new TODOErr("HashMap.SLL.removeFront");
+
+                    int curVal = current.value;
+
+                    System.out.println(current.next);
+
+                    this.buckets.setIndex(bucket, current.next);
+
+                    // throw new TODOErr("HashMap.SLL.removeFront");
+
+                    return curVal;
+
                 } else {
                     // 3.a.2. it wasn't the first node:
                     previous = current.next;

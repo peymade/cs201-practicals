@@ -8,13 +8,13 @@ import adt.errors.EmptyListError;
 import adt.errors.TODOErr;
 
 /**
- * This class represents a 'min' heap over integers.
- * This means that it can always give you the minimum value in O(1) time.
+ * This class represents a 'min' heap over integers. This means that it can
+ * always give you the minimum value in O(1) time.
  */
 public class IntMinHeap {
     /**
-     * The heap is stored in this list.
-     * This should be an ArrayList, or any {@linkplain RandomAccess} List.
+     * The heap is stored in this list. This should be an ArrayList, or any
+     * {@linkplain RandomAccess} List.
      */
     List<Integer> heap;
 
@@ -100,7 +100,7 @@ public class IntMinHeap {
      */
     public void insert(int value) {
         // 1. add to the back of the this.heap list.
-        // 2. sift-up that value.
+        // 2. kcick off the sift-up that value.
         throw new TODOErr("IntMinHeap.insert");
     }
 
@@ -158,6 +158,7 @@ public class IntMinHeap {
 
         if (this.heap.size() > 1) {
             // swap the bottom to the top and siftdown:
+            // 2 lines of code
             int replacement = this.heap.remove(this.heap.size() - 1);
             throw new TODOErr("put " + replacement + " at the top and siftDown from there!");
         } else {
@@ -168,9 +169,9 @@ public class IntMinHeap {
     }
 
     /**
-     * Private helper to maintain the heap property after a removal.
-     * Takes the current node and pushes it down until it is in the correct place,
-     * preserving the heap property.
+     * Private helper to maintain the heap property after a removal. Takes the
+     * current node and pushes it down until it is in the correct place, preserving
+     * the heap property.
      * 
      * @param index - the index to potentially push downward.
      */
@@ -215,9 +216,8 @@ public class IntMinHeap {
     }
 
     /**
-     * HeapSort:
-     * 1. heapify via constructor {@link #IntMinHeap(List)}
-     * 2. drain into a new list {@link drain}
+     * HeapSort: 1. heapify via constructor {@link #IntMinHeap(List)} 2. drain into
+     * a new list {@link drain}
      * 
      * Time: O(nlog(n))
      * 
