@@ -101,7 +101,14 @@ public class IntMinHeap {
     public void insert(int value) {
         // 1. add to the back of the this.heap list.
         // 2. kcick off the sift-up that value.
-        throw new TODOErr("IntMinHeap.insert");
+
+        this.heap.add(value);
+
+        int curValIn = this.heap.indexOf(value);
+
+        siftUp(curValIn);
+
+        // throw new TODOErr("IntMinHeap.insert");
     }
 
     /**
@@ -159,8 +166,13 @@ public class IntMinHeap {
         if (this.heap.size() > 1) {
             // swap the bottom to the top and siftdown:
             // 2 lines of code
+
+            System.out.println("hi");
             int replacement = this.heap.remove(this.heap.size() - 1);
-            throw new TODOErr("put " + replacement + " at the top and siftDown from there!");
+            this.heap.set(0, replacement);
+            siftDown(0);
+            // throw new TODOErr("put " + replacement + " at the top and siftDown from
+            // there!");
         } else {
             // delete the last thing, no sifting needed.
             this.heap.remove(0);

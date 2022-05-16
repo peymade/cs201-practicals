@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * This is our main class for SpookyMansion.
- * It interacts with a GameWorld and handles user-input.
- * It can play any game, really.
+ * This is our main class for SpookyMansion. It interacts with a GameWorld and
+ * handles user-input. It can play any game, really.
  *
  * @author jfoley
  *
@@ -24,7 +23,8 @@ public class Adventure {
 	static String runGame(TextInput input, GameWorld game) {
 		// This is the current location of the player (initialize as start).
 		String current = game.getStart();
-		// TODO: Use this set to add a "You've been here before" message (in the loop)
+
+		// Use this set to add a "You've been here before" message (in the loop)
 		Set<String> visitedPlaces = new HashSet<>();
 
 		// Play the game until quitting.
@@ -32,10 +32,25 @@ public class Adventure {
 		// breaks.
 		while (true) {
 			// Print the description of where you are.
+
+			boolean hereVar = false;
+
+			if (visitedPlaces.contains(current)) {
+				hereVar = true;
+			} else {
+				visitedPlaces.add(current);
+
+			}
+
+			System.out.println("this is " + current);
 			Place here = game.getPlace(current);
+			System.out.println(visitedPlaces);
 
 			System.out.println();
 			System.out.println("... --- ...");
+			if (hereVar) {
+				System.out.println("You've been here before.");
+			}
 			System.out.println(here.getDescription());
 
 			// Game over after print!

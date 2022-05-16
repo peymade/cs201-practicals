@@ -29,31 +29,31 @@ public class SpookyMansion implements GameWorld {
 	 * This constructor builds our SpookyMansion game.
 	 */
 	public SpookyMansion() {
-		Place entranceHall = insert(
-				Place.create("entranceHall", "You are in the grand entrance hall of a large building.\n"
-						+ "The front door is locked. How did you get here?"));
+		Place entranceHall = insert(Place.create("entranceHall", "You are in the grand entrance hall of a large building.\n"
+				+ "The front door is locked. How did you get here?"));
 		entranceHall.addExit(new Exit("basement", "There are stairs leading down."));
 		entranceHall.addExit(new Exit("attic", "There are stairs leading up."));
 		entranceHall.addExit(new Exit("kitchen", "There is a red door."));
 		entranceHall.addExit(new Exit("closet", "There is a brown door."));
 
 		String EMOJI_SKULL = "\uD83D\uDC80";
-		Place closet = insert(Place.create("closet",
-				"On the wall is scratched a series of letters and a skull icon (" + EMOJI_SKULL + ").\n"
-						+ "North.. North.. East.. South.\n"
-						+ "What could it mean?"));
+		Place closet = insert(Place.create("closet", "On the wall is scratched a series of letters and a skull icon ("
+				+ EMOJI_SKULL + ").\n" + "North.. North.. East.. South.\n" + "What could it mean?"));
 		closet.addExit(new Exit("entranceHall", "Go back."));
+
+		//
 
 		Place basement = insert(
 				Place.create("basement", "You have found the basement of the mansion.\n" + "It is darker down here.\n"
 						+ "You get the sense a secret is nearby, but you only see the stairs you came from."));
 		basement.addExit(new Exit("entranceHall", "There are stairs leading up."));
-		basement.addExit(
-				new Exit("fallingPit", "There appears to be a pit in the center of the room you could climb into..."));
+		basement
+				.addExit(new Exit("fallingPit", "There appears to be a pit in the center of the room you could climb into..."));
 
-		Place fallingPit = insert(
-				Place.create("fallingPit", "I don't know what you were thinking..."));
+		Place fallingPit = insert(Place.create("fallingPit", "I don't know what you were thinking..."));
 		fallingPit.addExit(new Exit("labyrinth0", "Keep falling."));
+
+		//
 
 		Place attic = insert(Place.create("attic",
 				"Something rustles in the rafters as you enter the attic. Creepy.\n" + "It's big up here."));
@@ -104,8 +104,7 @@ public class SpookyMansion implements GameWorld {
 		}
 
 		Place crypt = insert(Place.terminal("crypt", "You have found the crypt.\n"
-				+ "It is scary here, but there is an exit to outside.\n"
-				+ "Maybe you'll be safe out there."));
+				+ "It is scary here, but there is an exit to outside.\n" + "Maybe you'll be safe out there."));
 		assert (crypt.isTerminalState());
 
 		String labyrinthDescription = "You see four hallways stretching out into the mist.\n"

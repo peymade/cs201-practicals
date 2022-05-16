@@ -8,7 +8,7 @@
         "org.graalvm.*",
         "io.micrometer.shaded.*"
     ],
-    "java.debug.settings.vmArgs": "-ea",
+    "java.jdt.ls.vmargs": "--add-exports java.base/sun.security.action=ALL-UNNAMED",
     "java.configuration.updateBuildConfiguration": "automatic",
     "editor.formatOnSave": true,
     "files.exclude": {
