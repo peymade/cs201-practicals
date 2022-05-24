@@ -25,18 +25,38 @@ public class AppliedHeap {
             heap.offer(new ListTaker(input));
         }
 
+        while (heap.size() != 0) {
+            System.out.println(heap.remove().data.get(0));
+
+            int checker = heap.remove().data.get(0);
+
+            // ListTaker min = heap.removeMin();
+
+            ListTaker curMin = heap;
+
+            // look at the list, take the thing at position zero, and add it to output
+
+            int valueToAdd = curMin.take();
+            output.addBack(valueToAdd);
+
+            // if there is more there, put it back in heap
+            if (curMin.hasNext()) {
+                heap.offer(curMin);
+            }
+        }
+
         // while there are any "ListTakers" that are not done.
         // find the minimum ListTaker from the priority queue
         // take the next value from it; add to output
         // if that ListTaker isn't finished now, put it back in the heap.
-        throw new TODOErr("mergeSortedLists");
+        // throw new TODOErr("mergeSortedLists");
         // finally return output
+        return output;
     }
 
     /**
-     * This helper class moves through a list (without deleting from it).
-     * It's also comparable (based on the current element) ...
-     * so it can be placed in a heap.
+     * This helper class moves through a list (without deleting from it). It's also
+     * comparable (based on the current element) ... so it can be placed in a heap.
      */
     private static class ListTaker implements Comparable<ListTaker> {
         /** How far are we through taking items from 'data'? */
@@ -65,8 +85,8 @@ public class AppliedHeap {
         }
 
         /**
-         * Take a look at the next element without taking it.
-         * Not valid if not {@linkplain #hasNext}.
+         * Take a look at the next element without taking it. Not valid if not
+         * {@linkplain #hasNext}.
          * 
          * @return the current value in the list.
          */
